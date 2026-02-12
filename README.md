@@ -1,54 +1,53 @@
 # AcAs
-Asynchronous Cellular Automaton Simulator GPU computing OpenCL
+GPU-accelerated asynchronous cellular automaton simulator using OpenCL
 
 
 Introduction
 ============
 
-The purpose of this work is the creation of a simulator for synchronous,
+The purpose of this work is to create a simulator for synchronous,
 asynchronous, and probabilistic cellular automata. Cellular automata are
-a powerful representation model for physical and biological phenomena,
-for this reason we wanted to create a cellular automata simulator that
-can handle multiple types of cellular automata, suitable to be used for
-these simulations.
+a powerful modeling tool for physical and biological phenomena;
+for this reason, we set out to create a simulator that
+can handle multiple types of cellular automata, suitable for
+these kinds of simulations.
 
-The desire to simulate biological phenomena have leads to the need to
-use variants of cellular automata best suited to perform these
-simulations, as these systems are inherently asynchronous. One of these
+The desire to simulate biological phenomena has led to the need to
+use variants of cellular automata better suited for these
+simulations, as biological systems are inherently asynchronous. One of these
 variants, asynchronous cellular automata (ACA), was introduced for this
-purpose and its implementation represents one of the main innovative
-aspects of the simulator developed.
+purpose, and its implementation represents one of the main innovative
+aspects of the simulator.
 
-Since cellular automata are a model widely used, there are already some
-simulators. These simulators are plagued by several problems that make
-them unfit to perform simulations in biology. In particular, they do not
-deal with asynchronous cellular automata and do not allow to perform
-simulations with large amounts of data. The current simulators, for the
-most part, are not multi-platform, are not able to exploit all the
-available hardware, such as graphics processing units (GPUs), and are
-usually programmed with single thread.
+Since cellular automata are a widely used model, several simulators
+already exist. However, these simulators suffer from several problems that make
+them unfit for biological simulations. In particular, they do not
+handle asynchronous cellular automata and do not support
+simulations with large amounts of data. Most current simulators
+are not multi-platform, are unable to exploit all the
+available hardware such as graphics processing units (GPUs), and are
+usually single-threaded.
 
 The objective of this work was therefore to develop a simulator that:
 
--   Has the ability to simulate inherently asynchronous biological
-    phenomena. This led to the introduction of the ability to simulate
+-   Can simulate inherently asynchronous biological
+    phenomena, through the support of
     asynchronous cellular automata.
 
--   Must be portable across operating systems.
+-   Is portable across operating systems.
 
--   Can properly use the hardware of modern computers.
+-   Can properly exploit the hardware of modern computers.
 
--   Provides the ability to run simulations with a large amount of data.
+-   Can run simulations with large amounts of data.
 
--   Gives the user the ability to insert local rules without
+-   Gives the user the ability to define local rules without
     restrictions.
 
--   Has the ability to perform simulations in one, two or three
+-   Can perform simulations in one, two, or three
     dimensions.
 
-A simulator with the features mentioned above can effectively execute
-the simulation of phenomena for which there are models based on cellular
-automata.
+A simulator with the features listed above can effectively model
+phenomena for which cellular automata representations exist.
 
 
 How To Use
@@ -72,151 +71,151 @@ biological phenomena.
 
 ![Example of cellular automata](images/rule30.png)
 
-Those just described are classical cellular automata, or in which all
+The automata just described are classical cellular automata, in which all
 cells are updated simultaneously. In addition to classical cellular
-automata, there are variants that we have decided tu support that are
-interesting not only for theory. In particular:
+automata, there are variants that we have chosen to support, which are
+interesting beyond theory alone. In particular:
 
--   Probabilistic: the updating of the cell depends on a fixed
+-   Probabilistic: each cell is updated depending on a fixed
     probability $p$.
 
--   Asynchronous: the update is completely asynchronous, at each
-    iteration a single cell is updated.
+-   Asynchronous: the update is completely asynchronous; at each
+    iteration only a single cell is updated.
 
-Both these variants are important because they allow to handle
-simulations of non-synchronous systems. In fact, they are commonly used
-to simulate natural phenomena.
+Both variants are important because they enable the simulation
+of non-synchronous systems. In fact, they are commonly used
+to model natural phenomena.
 
 Computation on GPUs
 ===================
 
-We have chosen to use the computation on GPUs, in particular the use of
-the *OpenCL* (*Open Computing Language technology*). In this way so that
-the processing of large amounts of data can be performed more
-effectively.
+We have chosen to leverage GPU computation, specifically through
+*OpenCL* (*Open Computing Language*), so that
+large amounts of data can be processed more
+efficiently.
 
-Parallel programming on GPU, or GPGPU, *General-Purpose computing on
-Graphics Processing Units* born around the year 2000, when some
-researchers began to use the GPU to perform general computing
-applications. They realized that the computing power of GPUs allows to
-improve the performance of many scientific applications.
+GPGPU (*General-Purpose computing on
+Graphics Processing Units*) was born around the year 2000, when
+researchers began to use GPUs for general-purpose
+computation. They realized that the computing power of GPUs could
+significantly improve the performance of many scientific applications.
 
-With the evolving structure of the video card was created OpenCL, a
-framework specific for GPU programming in C++. This framework
-facilitates programming and allows to use the computing power of GPUs.
+As GPU architectures evolved, OpenCL was created as a
+framework for GPU programming in C++. This framework
+simplifies development and allows harnessing the computing power of GPUs.
 
-OpenCL was created to take advantage of GPU hardware, but it can also be
-used on CPUs (when a GPU that supports the framework is absent).
+OpenCL was designed to take advantage of GPU hardware, but it can also be
+used on CPUs (when a compatible GPU is not available).
 
-The reason for the discrepancy in performance between the CPU and GPU is
-due to the fact that, having to deal with rendering, the GPU is
-specialized in highly parallel and computationally intensive operations.
+The performance gap between CPUs and GPUs stems from the fact that,
+being designed for rendering, GPUs are
+specialized for highly parallel and computationally intensive operations.
 
-Due to the parallel nature of *cellular automata* we can take advantage
-of GPU parallelism.
+Due to the inherently parallel nature of *cellular automata*, we can take
+full advantage of GPU parallelism.
 
 Comparison with other simulators
 ================================
 
-The simulator developed was compared with the most used and general *AC*
-simulators, excluding the ones that can be used only for the study of a
+The simulator was compared with the most widely used general-purpose *CA*
+simulators, excluding those designed for the study of a
 single phenomenon. The existing simulators are weak in at least one of
-these aspects:
+the following aspects:
 
 -   Low portability.
 
--   They performs only a restricted set of rules.
+-   They support only a restricted set of rules.
 
--   Difficulty of performing simulations with a large amount of data.
+-   Difficulty in performing simulations with large amounts of data.
 
--   They do not adequately take advantage of the existing hardware of
-    computers.
+-   They do not adequately exploit the available hardware of
+    modern computers.
 
--   It is impossible to simulate non-synchronous variations of classical
+-   They cannot simulate non-synchronous variants of classical
     cellular automata.
 
--   They can work in only one or two dimensions.
+-   They can operate in only one or two dimensions.
 
-The simulator aims achieved the goals of managing cellular automata
+The simulator aims to achieve the following goals: managing cellular automata
 variants suitable for the simulation of natural phenomena (asynchronous
-and probabilistic automata) to be multi-platform, it can be programmed
-with any rule, it can operate on very large data sets, it is easily
-expandable, and it is able to exploit the current hardware
-architectures. These are the characteristics that makes it different
-from current simulators. It was confronted with two popular simulators
-(JCASim and Mirek’s Java Cellebration) analyzing its strengths and
+and probabilistic automata), being multi-platform, supporting
+any user-defined rule, operating on very large data sets, being easily
+extensible, and being able to exploit current hardware
+architectures. These are the characteristics that set it apart
+from existing simulators. It was compared with two popular simulators
+(JCASim and Mirek's Java Cellebration), analyzing their respective strengths and
 weaknesses.
 
 Structure of the simulator
 ==========================
 
-The simulator is designed to run in batch mode, the user controls the
+The simulator is designed to run in batch mode; the user controls its
 operation via a configuration file. The simulation results are then
-stored on one or more output files. The output files of
-three-dimensional simulations can be processed by a *perl* script which,
-using a *ray tracing* software (Povray), is able to generate images and
+stored in one or more output files. The output files of
+three-dimensional simulations can be processed by a *Perl* script that,
+using a *ray tracing* tool (POV-Ray), can generate images and
 movies of the simulations.
 
 More specifically, the structure of the simulator is mainly hierarchical
-and modular. The three different types of automation, *Synchronous,
-Probabilistic, Walk* derived from a single class, *Simulator*. Each of
-the three classes has three sub-classes corresponding to different
-dimensions in which the simulations can be performed. The simulator was
-designed to simplify the maintenance and the inclusion of new types of
+and modular. The three different types of automata — *Synchronous,
+Probabilistic, Walk* — are derived from a single class, *Simulator*. Each of
+the three classes has three sub-classes corresponding to the different
+dimensions in which simulations can be performed. The simulator was
+designed to simplify maintenance and the addition of new types of
 cellular automata.
 
-An important feature offered by the simulator is in the calculation of
-submatrices. This feature is useful with very large universes with few
-active cells. In this case it is possible to run the simulator only on
-these blocks, saving time and resources during execution.
+An important feature offered by the simulator is the computation of
+submatrices. This is useful for very large universes with few
+active cells: in this case, the simulator can operate only on
+the relevant blocks, saving time and resources during execution.
 
 ![t=2](images/002.png) ![t=10](images/010.png) ![t=18](images/018.png)
 
 Conclusions and Future Developments
 ===================================
 
-A simulator that can simulate classic, asynchronous and probabilistic
+A simulator capable of running classical, asynchronous, and probabilistic
 cellular automata has been developed. It works on a wide range of
-machines using all the potential of the hardware. The simulator has been
-developed is to satisfy some needs not covered by other simulators, such
-as providing the opportunity to work on large data sets in batch mode
-without being too complex for the end user. The ability of the simulator
-to handle non-classical cellular automata, often used for modeling
-physical and biological phenomena is another important feature.
+machines, fully exploiting the available hardware. The simulator was
+developed to address needs not covered by other simulators, such
+as the ability to work on large data sets in batch mode
+without being overly complex for the end user. The ability to
+handle non-classical cellular automata, often used for modeling
+physical and biological phenomena, is another important feature.
 
-Possible future developments of this project are mainly:
+Possible future developments of this project include:
 
 
--   Provide the system with a graphical interface if you do not want to
+-   Adding a graphical interface for users who do not want to
     run simulations in batch mode.
 
--   Provide the system with a compression algorithm for the output. This
-    feature will allow to speed up writing to disk.
+-   Adding a compression algorithm for the output, which
+    would speed up writing to disk.
 
--   Adding other types of cellular automata (e.g. CA with non-uniform
+-   Supporting other types of cellular automata (e.g., CA with non-uniform
     local rules).
 
--   Provide tools to collect statistics of the simulation.
+-   Providing tools to collect statistics from the simulation.
 
--   Better memory management to increase the maximum simulation size.
+-   Improving memory management to increase the maximum simulation size.
 
--   Development of precompiled functions to support the user in writing
+-   Developing precompiled functions to assist the user in writing
     rules.
 
-The graphical interface would facilitate the inclusion of inputs and the
-output displays.
+A graphical interface would facilitate input specification and
+output visualization.
 
-A decompression algorithm of the inputs (a compression algorithm for the
-outputs) it would be useful to reduce the bottleneck represented by
+A compression algorithm for the outputs (and decompression for the
+inputs) would help reduce the bottleneck caused by
 writing to disk. It would be interesting to implement this functionality
-with the use of *OpenCL*.
+using *OpenCL*.
 
-It may be also necessary to add new types of cellular automata. It would
-also be useful to add a tool to collect statistics on the simulation,
-such as the number of cells in a given state at every time step.
+It may also be necessary to add new types of cellular automata. It would
+be useful to add a tool for collecting simulation statistics,
+such as the number of cells in a given state at each time step.
 
-A more detailed study of the use of memory may lead to a reduction in
-its use and consequently in an increase of the maximum size of the
+A more detailed study of memory usage could lead to a reduction in
+consumption and consequently an increase in the maximum size of the
 simulated systems.
 
 
